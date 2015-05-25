@@ -1,0 +1,13 @@
+﻿
+<h2></h2>
+<br />
+@Html.ActionLink("Coupon Realization", "CouponRealization","BusinessCoupon",null,null)
+<br />
+<br />
+@Html.ActionLink("Coupon In Order", "CouponInOrder", "BusinessCoupon", new { id = TempData["Pid"] }, null)
+<br />
+<br />
+@Html.ActionLink("My businesses", "business", "Manager", new { id = TempData["Pid"], Admin = "false" }, null)
+<br />
+<br />
+@Html.ActionLink("Search Coupon", "SearchCoupon", "UserCoupon", null, null)

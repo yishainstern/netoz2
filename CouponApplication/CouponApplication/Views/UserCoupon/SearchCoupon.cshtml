@@ -1,0 +1,45 @@
+﻿@model CouponApplication.Models.Coupon
+@{
+    ViewBag.Title = "SearchCoupon";
+}
+
+<h3>Search Coupons by category or business name or location:</h3>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>User</legend>
+
+        <div class="editor-label">
+            @Html.Label("Category")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Categories[0].Name)
+            @Html.ValidationMessageFor(model => model.Categories[0].Name)
+        </div>
+        <div class="editor-label">
+            @Html.Label("Business Name")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Business.Name)
+            @Html.ValidationMessageFor(model => model.Business.Name)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Business.City)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Business.City)
+            @Html.ValidationMessageFor(model => model.Business.City)
+        </div>
+        <p>
+            <input type="submit" value="SearchCopon" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

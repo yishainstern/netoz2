@@ -1,0 +1,26 @@
+﻿@model CouponApplication.Models.User
+@{
+    ViewBag.Title = "ForgotPass";
+}
+
+<h2>Forgot Password</h2>
+@using (Html.BeginForm("MyPass", "User", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>@Html.LabelFor(a => a.Email)</td>
+            <td>@Html.TextBoxFor(a => a.Email)</td>
+            <td>@Html.ValidationMessageFor(a => a.Email)</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="SendPasswordToEmail" />
+            </td>
+        </tr>
+    </table>
+
+    if (TempData["SendEror"] != null)
+    {
+        <h4> @TempData["SendEror"] </h4>
+    }
+}

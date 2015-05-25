@@ -1,0 +1,73 @@
+﻿@model CouponApplication.Models.AllModel
+@{
+    ViewBag.Title = "Addbusiness";
+}
+
+<h2>Add business</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>User</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Business.BusinessId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Business.BusinessId)
+            @Html.ValidationMessageFor(model => model.Business.BusinessId)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Business.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Business.Name)
+            @Html.ValidationMessageFor(model => model.Business.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Business.Adress)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Business.Adress)
+            @Html.ValidationMessageFor(model => model.Business.Adress)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Business.City)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Business.City)
+            @Html.ValidationMessageFor(model => model.Business.City)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Categories)
+        </div>
+        <div class="editor-field">
+            @for (int i = 0; i < Model.Categories.Count; i++)
+            {
+                @Html.CheckBoxFor(model => Model.Categories[i].Choose, Model.Categories[i].CategoryId)
+                @Html.HiddenFor(model => Model.Categories[i].CategoryId)
+                @Html.HiddenFor(model => Model.Categories[i].Name)
+                @Html.Label(Model.Categories[i].Name)
+            }
+        </div>
+        <p>
+            <input type="submit" value="Addbusiness" />
+        </p>
+    </fieldset>
+    if (TempData["notice1"] != null)
+    {
+        <h4> @TempData["notice1"] </h4>
+    }
+    if (TempData["notice2"] != null)
+    {
+        <h4> @TempData["notice2"] </h4>
+    }
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

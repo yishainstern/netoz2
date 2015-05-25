@@ -1,0 +1,13 @@
+﻿@model IEnumerable<CouponApplication.Models.User>
+
+<br />
+@using (Html.BeginForm("UserSignUp", "User"))
+{
+    <input type="submit" value="Sign Up" />
+}
+<br />
+<br />
+@using (Html.BeginForm("UserLogIn", "User"))
+{
+    <input type="submit" value="Log In" />
+}

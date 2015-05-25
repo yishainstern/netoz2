@@ -1,0 +1,45 @@
+﻿@model CouponApplication.Models.Cpuon_from_network
+@{
+    ViewBag.Title = "AddCouponFromNetWork";
+}
+
+<h2>AddCouponFromNetWork</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>User</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CouponId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CouponId)
+            @Html.ValidationMessageFor(model => model.CouponId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Link)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Link)
+            @Html.ValidationMessageFor(model => model.Link)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.netwrok_name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.netwrok_name)
+            @Html.ValidationMessageFor(model => model.netwrok_name)
+        </div>
+        <p>
+            <input type="submit" value="AddCopon" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

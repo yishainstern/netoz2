@@ -1,0 +1,87 @@
+﻿@model IEnumerable<CouponApplication.Models.Business>
+
+<h2>Businesses</h2>
+
+<p>
+  
+        @Html.ActionLink("Add business", "Addbusiness")
+    
+</p>
+@{string idOwner = null;
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BusinessId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusinessCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{idOwner = item.OwnerId;}
+                    @Html.DisplayFor(modelItem => item.BusinessId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @foreach (var item2 in item.BusinessCategory)
+                    {
+                        @Html.DisplayFor(modelItem => item2.Name)
+                        @Html.Label(" ");
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @if (Session["Admin"].ToString() == "false")
+                    {
+                        @Html.ActionLink("EditBusnis", "EditBusnis", new { id = item.BusinessId })
+                    }
+                    ||
+                    @if (Session["Admin"].ToString() == "false")
+                    {
+                        @Html.ActionLink("DeleteBusnis", "DeleteBusnis", new { id = item.BusinessId })
+                    }
+                    ||
+                    @Html.ActionLink("Categories", "Categories", new { id = item.BusinessId }) ||
+                    @Html.ActionLink("Copons", "Copons", new { id = item.BusinessId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br />
+    <br />
+    if (Session["Admin"].ToString() == "true")
+    {
+        @Html.ActionLink("Go Back", "businessManagment")
+    }
+    if (Session["Admin"].ToString() == "false")
+    {
+        @Html.ActionLink("Go Back", "Index", "Business", new { id = idOwner }, null)
+    }
+}

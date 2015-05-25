@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CouponApplication.Models.UseCopun>
+
+<h2>Coupon In Order</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rank)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rank)
+            </td>
+            <td>
+                @Html.ActionLink("SeeCoupon", "SeeCoupon", "UserCoupon", new { id = item.CouponId }, null)
+            </td>
+            <td>
+                @Html.ActionLink("SeeUser", "SeeUser", new { id = item.UserId })
+            </td>
+        </tr>
+    }
+
+</table>

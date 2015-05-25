@@ -1,0 +1,29 @@
+﻿@model Tuple<List<CouponApplication.Models.Category>, string>
+
+<h2>Add Favorite Category</h2>
+@using (Html.BeginForm("AddCategories", "User", new { PersonID = Model.Item2 }))
+{
+    <table>
+        <tr>
+            <td><text>UserPreferences</text></td>
+            <td>
+                @for (int i = 0; i < Model.Item1.Count; i++)
+                {
+                    <input type="checkbox" id="yourId" name="selectedIds" value="@Model.Item1[i].CategoryId" />
+                    @Html.DisplayFor(model => model.Item1[i].Name)
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br /><input type="submit" value="Submit" />
+            </td>
+            <td>
+                @if (TempData["notice6"] != null)
+                {
+                    @TempData["notice6"];
+                }
+            </td>
+        </tr>
+    </table>
+}

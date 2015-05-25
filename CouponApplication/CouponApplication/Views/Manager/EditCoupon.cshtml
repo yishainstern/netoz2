@@ -1,0 +1,62 @@
+﻿@model CouponApplication.Models.Coupon
+
+<h2>EditCoupon</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Person</legend>
+
+        @Html.HiddenFor(model => model.CouponId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OriginalPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OriginalPrice)
+            @Html.ValidationMessageFor(model => model.OriginalPrice)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CurrentPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CurrentPrice)
+            @Html.ValidationMessageFor(model => model.CurrentPrice)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.deadline)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.deadline)
+            @Html.ValidationMessageFor(model => model.deadline)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

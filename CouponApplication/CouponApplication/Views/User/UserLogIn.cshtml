@@ -1,0 +1,24 @@
+﻿@model CouponApplication.Models.User
+
+<h1>LogIn</h1>
+
+@using (Html.BeginForm("LogIn", "User", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>@Html.LabelFor(a => a.Email)</td>
+            <td>@Html.TextBoxFor(a => a.Email)</td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(a => a.Password)
+            </td>
+            <td>@Html.PasswordFor(a => a.Password)</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Login" /></td>
+            <td>@Html.ActionLink("Forgot your password", "ForgotPass")</td>
+        </tr>
+    </table>
+
+}

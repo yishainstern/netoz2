@@ -1,0 +1,12 @@
+﻿
+<h2>acceptCouponRegister</h2>
+@using (Html.BeginForm("acceptCoupon", "Manager"))
+{
+    @Html.Label("Coupon Id:")
+    @Html.TextBox("SearchText")
+    <input type="submit" value="Accept" />
+}
+@if (TempData["notice555"] != null)
+{
+    @TempData["notice555"]
+}

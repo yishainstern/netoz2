@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CouponApplication.Models.Category>
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>Categories</h2>
+
+<p>
+    @if (Session["Admin"].ToString() == "true")
+    {
+        @Html.ActionLink("Add Category", "AddCategory")
+    }
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+        </tr>
+    }
+</table>
+<br />
+<br />
+@if (Session["Admin"].ToString() == "true")
+{
+    @Html.ActionLink("Go Back", "businessManagment")
+}

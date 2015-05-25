@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "AfterLogin";
+}
+
+<h2>
+    @if (Session["LogedUserFullname"] != null)
+    {
+        <text>
+            Welcome @Session["LogedUserFullname"].ToString()
+        </text>
+    }
+</h2>
+<h3>
+    <br />
+    @Html.ActionLink("Show Favorites Coupons", "ShowFavoritesCoupons","UserCoupon",null,null)
+    <br />
+    <br />
+    @Html.ActionLink("Search Coupon", "SearchCoupon", "UserCoupon", null, null)
+    <br />
+    <br />
+    @Html.ActionLink("Search Business", "SearchBusiness","Business", null,null)
+    <br />
+    <br />
+    @Html.ActionLink("Order Coupon", "OrderCoupon", "UserCoupon", new { id = Session["LogedUserID"].ToString() }, null)
+    <br />
+    <br />
+    @Html.ActionLink("Coupon That I Ordered", "CouponThatOrdered", "UserCoupon", null, null)
+    <br />
+    <br />
+    @Html.ActionLink("Add Coupon From NetWork", "AddCouponFromNetWork", "UserCoupon",null, null)
+</h3>

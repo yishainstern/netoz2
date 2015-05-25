@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "CouponRealization";
+}
+
+<h2>CouponRealization</h2>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.Label("Coupon Code")
+    @Html.TextBox("SearchText")
+    <input type="submit" value="submit" />
+}
+@if (TempData["notice4"] != null)
+{
+    @TempData["notice4"]
+}

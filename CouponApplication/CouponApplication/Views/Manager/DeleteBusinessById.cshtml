@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "DeleteBusinessById";
+}
+
+<h2>DeleteBusinessById</h2>
+@using (Html.BeginForm("AcceptDeleteBusinessById", "Manager"))
+{
+    @Html.Label("Business Id:")
+    @Html.TextBox("SearchText")
+    <input type="submit" value="Delete" />
+}
+@if (TempData["notice5"] != null)
+{
+    @TempData["notice5"]
+}

@@ -1,0 +1,11 @@
+﻿<h2>AcceptBusinessById</h2>
+@using (Html.BeginForm("acceptBusiness", "Manager"))
+{
+    @Html.Label("Business Id:")
+    @Html.TextBox("SearchText")
+    <input type="submit" value="Accept" />
+}
+@if (TempData["notice55"] != null)
+{
+    @TempData["notice55"]
+}

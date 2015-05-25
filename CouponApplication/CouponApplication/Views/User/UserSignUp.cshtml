@@ -1,0 +1,67 @@
+﻿@model CouponApplication.Models.AllModel
+
+@{
+    ViewBag.Title = "UserSignUp";
+}
+
+<h2>SignUp</h2>
+@using (Html.BeginForm("SignUp", "User"))
+{
+    <table>
+        <tr>
+            <td>@Html.LabelFor(model => model.User.PersonId)</td>
+            <td>@Html.TextBoxFor(model => model.User.PersonId)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.User.Name)</td>
+            <td>@Html.TextBoxFor(model => model.User.Name)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.User.Email)</td>
+            <td>@Html.TextBoxFor(model => model.User.Email)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.User.Password)</td>
+            <td>@Html.PasswordFor(model => model.User.Password)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.User.Age)</td>
+            <td>@Html.TextBoxFor(model => model.User.Age)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.User.gender)</td>
+            <td>@Html.TextBoxFor(model => model.User.gender)<text>(write 0 for male,1 for female)</text></td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.User.Location)</td>
+            <td>@Html.TextBoxFor(model => model.User.Location)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.User.Phone)</td>
+            <td>@Html.TextBoxFor(model => model.User.Phone)</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Your Category")</td>
+            <td>
+                @for (int i = 0; i < Model.Categories.Count;i++)
+                {
+                    @Html.CheckBoxFor(model => Model.Categories[i].Choose, Model.Categories[i].CategoryId)
+                    @Html.HiddenFor(model => Model.Categories[i].CategoryId)
+                    @Html.HiddenFor(model => Model.Categories[i].Name)
+                    @Html.Label(Model.Categories[i].Name)
+                }
+            </td>
+        </tr>
+        <tr><td>
+    @if (TempData["notice6"] != null)
+    {
+        @TempData["notice6"];
+    }
+</td>
+
+        </tr>
+<tr>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+}

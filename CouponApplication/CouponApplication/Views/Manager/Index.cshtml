@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+@using (Html.BeginForm("businessManagment", "Manager"))
+{
+    <input type="submit" value="business Managment" />
+}
+<br />
+<br />
+@using (Html.BeginForm("messages", "Manager"))
+{
+    <input type="submit" value="My Messages" />
+}
+<br />
+<br />
+@using (Html.BeginForm("DeleteBusinessById", "Manager"))
+{
+    <input type="submit" value="Delete Business By ID" />
+}
+<br />
+<br />
+@using (Html.BeginForm("acceptBusinessRegister", "Manager"))
+{
+    <input type="submit" value="accept business register" />
+}
+<br />
+<br />
+@using (Html.BeginForm("acceptCouponRegister", "Manager"))
+{
+    <input type="submit" value="accept Coupon Register" />
+}
