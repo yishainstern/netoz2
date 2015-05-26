@@ -14,7 +14,12 @@ namespace CouponApplication.Controllers
         private static string OwnerId = null;
         private static int busnissID = 0;
 
-        public ManagerController(string s) 
+        public ManagerController()
+        {
+            
+        }
+
+        public ManagerController(string s)
         {
             OwnerId = s;
         }
@@ -52,7 +57,7 @@ namespace CouponApplication.Controllers
             return View(db.Notifications.ToList());
         }
         //Delete
-        public ActionResult Delete(string id=null)
+        public ActionResult Delete(string id = null)
         {
             Notifications not = db.Notifications.Find(id);
             db.Notifications.Remove(not);
@@ -101,7 +106,7 @@ namespace CouponApplication.Controllers
             Business B = db.Businesses.Find(SearchText);
             if (B != null)
             {
-                B.Status="מאושר";
+                B.Status = "מאושר";
                 db.SaveChanges();
                 return RedirectToAction("AcceptMassege");
             }
@@ -197,9 +202,10 @@ namespace CouponApplication.Controllers
                     db.SaveChanges();
                     return RedirectToAction("businessManagment");
                 }
-                else {
+                else
+                {
                     TempData["notice60"] = "--->this owner was existed!!!";
-                    return View(user);    
+                    return View(user);
                 }
             }
 
@@ -220,7 +226,8 @@ namespace CouponApplication.Controllers
             string ansAdmin = "false";
             bool owner = false;
             bool field = true;
-            if (Session != null) {
+            if (Session != null)
+            {
                 if (Session["Admin"].ToString() == "true")
                 {
                     ansAdmin = "true";
@@ -256,7 +263,7 @@ namespace CouponApplication.Controllers
                         owner = true;
                     }
                 }
-                if (string.IsNullOrEmpty(b.Business.Name) || b.Business.BusinessId==null || string.IsNullOrEmpty(b.Business.Adress) || string.IsNullOrEmpty(b.Business.City))
+                if (string.IsNullOrEmpty(b.Business.Name) || b.Business.BusinessId == null || string.IsNullOrEmpty(b.Business.Adress) || string.IsNullOrEmpty(b.Business.City))
                 {
                     TempData["notice2"] = "--->all fields are required!!!"; field = false;
                 }
@@ -279,7 +286,7 @@ namespace CouponApplication.Controllers
                                 {
                                     Category cc = db.Categories.Find(C.CategoryId);
                                     cc.Businesses.Add(b.Business);
-                                    if (b.Business.BusinessCategory==null)
+                                    if (b.Business.BusinessCategory == null)
                                     {
                                         b.Business.BusinessCategory = new List<Category>();
                                     }
@@ -395,7 +402,8 @@ namespace CouponApplication.Controllers
             {
                 M.Coupon.Status = "מאושר";
             }
-            else {
+            else
+            {
                 Notifications not = db.Notifications.Find(M.Coupon.CouponId);
                 if (not == null)
                 {
@@ -407,11 +415,12 @@ namespace CouponApplication.Controllers
                     not.Content = "coupon id= " + M.Coupon.CouponId;
                     db.Manager.First().Notifications.Add(not);
                 }
-                else {
+                else
+                {
                     not.Type = "Accept coupon";
                     not.Content = "coupon id= " + M.Coupon.CouponId;
                 }
-               
+
                 M.Coupon.Status = "לא מאושר";
             }
             bool exist = false;
@@ -485,7 +494,7 @@ namespace CouponApplication.Controllers
         [HttpPost]
         public ActionResult EditCoupon(Coupon copon)
         {
-            int Bid=0;
+            int Bid = 0;
             if (ModelState.IsValid)
             {
                 foreach (Coupon C in db.Coupons)
@@ -515,7 +524,7 @@ namespace CouponApplication.Controllers
                         else
                         {
                             not.Type = "Accept coupon";
-                            not.Content = "coupon id= " +copon.CouponId;
+                            not.Content = "coupon id= " + copon.CouponId;
                         }
                         //
                     }
@@ -597,24 +606,24 @@ namespace CouponApplication.Controllers
         {
             Business Busnis = db.Businesses.Find(id);
 
-                Notifications not = db.Notifications.Find(id);
-                if (not == null)
-                {
-                    not = new Notifications();
-                    not.NotificationsId = Busnis.BusinessId;
-                    not.Manager = db.Manager.First();
-                    not.ManagerId = db.Manager.First().PersonId;
-                    not.Type = "Delete Business";
-                    not.Content = "Business id= " + Busnis.BusinessId;
-                    db.Manager.First().Notifications.Add(not);
-                }
-                else 
-                {
-                    not.Type = "Delete Business";
-                    not.Content = "Business id= " + Busnis.BusinessId;
-                }
-               
-                db.SaveChanges();
+            Notifications not = db.Notifications.Find(id);
+            if (not == null)
+            {
+                not = new Notifications();
+                not.NotificationsId = Busnis.BusinessId;
+                not.Manager = db.Manager.First();
+                not.ManagerId = db.Manager.First().PersonId;
+                not.Type = "Delete Business";
+                not.Content = "Business id= " + Busnis.BusinessId;
+                db.Manager.First().Notifications.Add(not);
+            }
+            else
+            {
+                not.Type = "Delete Business";
+                not.Content = "Business id= " + Busnis.BusinessId;
+            }
+
+            db.SaveChanges();
 
             return View();
         }
