@@ -25,3 +25,30 @@ C:\Users\User\Desktop\CouponApplication\UnitTestProject1\obj\Debug\UnitTestProje
 C:\Users\User\Desktop\CouponApplication\UnitTestProject1\bin\Debug\UnitTestProject1.dll.config
 C:\Users\User\Desktop\CouponApplication\UnitTestProject1\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\User\Desktop\CouponApplication\UnitTestProject1\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\UnitTestProject1.dll.config
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\UnitTestProject1.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\UnitTestProject1.pdb
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\CouponApplication.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\EntityFramework.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\System.Web.Optimization.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\Microsoft.Web.WebPages.OAuth.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\DotNetOpenAuth.AspNet.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\DotNetOpenAuth.Core.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\DotNetOpenAuth.OAuth.Consumer.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\DotNetOpenAuth.OAuth.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\DotNetOpenAuth.OpenId.RelyingParty.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\DotNetOpenAuth.OpenId.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\CouponApplication.pdb
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\EntityFramework.xml
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\Microsoft.Web.WebPages.OAuth.xml
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\DotNetOpenAuth.AspNet.xml
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\DotNetOpenAuth.Core.xml
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\DotNetOpenAuth.OAuth.Consumer.xml
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\DotNetOpenAuth.OAuth.xml
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\bin\Debug\DotNetOpenAuth.OpenId.xml
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\obj\Debug\UnitTestProject1.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\obj\Debug\UnitTestProject1.dll
+C:\Users\User\Desktop\תיקיה חדשה\netoz2\CouponApplication\UnitTestProject1\obj\Debug\UnitTestProject1.pdb

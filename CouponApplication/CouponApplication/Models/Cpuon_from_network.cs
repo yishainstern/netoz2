@@ -7,7 +7,7 @@ namespace CouponApplication.Models
 {
     public class Cpuon_from_network : Coupons
     {
-        public string Cpuon_from_networkId { get; set; }
+        public int Cpuon_from_networkId { get; set; }
         public string Link { get; set; }
         public string netwrok_name { get; set; }
 

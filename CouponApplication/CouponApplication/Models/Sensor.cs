@@ -7,6 +7,6 @@ namespace CouponApplication.Models
 {
     public class Sensor
     {
-        public string SensorId { get; set; }
+        public int SensorId { get; set; }
     }
 }

@@ -8,13 +8,13 @@ namespace CouponApplication.Models
 {
     public class Business
     {
-        public string BusinessId { get; set; }
+        public int BusinessId { get; set; }
         public string Name { get; set; }
         public string Adress { get; set; }
         public string City { get; set; }
         public string Status { get; set; }
 
-        public string GPSlocationId { get; set; }
+        public int GPSlocationId { get; set; }
         public virtual GPS GPSlocation { get; set; }
         public virtual List<Coupon> Coupons { get; set; }
         public virtual List<Category> BusinessCategory { get; set; }

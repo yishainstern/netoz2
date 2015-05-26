@@ -7,7 +7,7 @@ namespace CouponApplication.Models
 {
     public class Notifications
     {
-        public string NotificationsId { get; set; }
+        public int NotificationsId { get; set; }
         public string Type { get; set; }
         public string Content { get; set; }
         public string ManagerId { get; set; }

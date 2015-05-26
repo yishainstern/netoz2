@@ -53,7 +53,10 @@
         </p>
     </fieldset>
 }
-
+@if (TempData["notice60"] != null)
+{
+    @TempData["notice60"];
+}
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

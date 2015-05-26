@@ -17,7 +17,7 @@ namespace CouponApplication.Models
         public virtual List<UseCopun> UsersCopon { get; set; }
         public virtual List<Category> Categories { get; set; }
 
-        public string BusinessId { get; set; }
+        public int BusinessId { get; set; }
         public virtual Business Business { get; set; }
     }
 }

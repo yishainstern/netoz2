@@ -7,7 +7,7 @@ namespace CouponApplication.Models
 {
     public class UseCopun
     {
-        public string UseCopunId { get; set; }
+        public int UseCopunId { get; set; }
         public string Code { get; set; }
         public DateTime OrderDay { get; set; }
         public string receipt { get; set; }
@@ -17,9 +17,9 @@ namespace CouponApplication.Models
 
         public string UserId { get; set; }
         public virtual User User { get; set; }
-        public string CouponId { get; set; }
+        public int CouponId { get; set; }
         public virtual Coupon Coupon { get; set; }
-        public string Cpuon_from_networkId { get; set; }
+        public int Cpuon_from_networkId { get; set; }
         public virtual Cpuon_from_network CouponNet { get; set; }
     }
 }

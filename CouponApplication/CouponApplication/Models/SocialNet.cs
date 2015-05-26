@@ -7,7 +7,7 @@ namespace CouponApplication.Models
 {
     public class SocialNet
     {
-        public string SocialNetId { get; set; }
+        public int SocialNetId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string AcountName { get; set; }

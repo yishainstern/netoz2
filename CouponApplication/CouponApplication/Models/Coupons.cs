@@ -7,6 +7,6 @@ namespace CouponApplication.Models
 {
     public class Coupons
     {
-        public string CouponId { get; set; }
+        public int CouponId { get; set; }
     }
 }

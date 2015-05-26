@@ -16,7 +16,7 @@ namespace CouponApplication.Controllers
         private CouponContext db = new CouponContext();
         private static List<Coupon> ListC = null;
         private static List<Business> ListB = null;
-        private static string coponID = null;
+        private static int coponID = 0;
         private static string useID = null;
         private static string usecoponID = null;
 
@@ -135,7 +135,7 @@ namespace CouponApplication.Controllers
 
 
         //ShowCopons
-        public ActionResult ShowCopons(string id = null)
+        public ActionResult ShowCopons(int id = 0)
         {
             List<Coupon> ListCopon = new List<Coupon>();
             foreach (Business B in db.Businesses)
@@ -159,7 +159,7 @@ namespace CouponApplication.Controllers
         }
 
         //ToOrder
-        public ActionResult ToOrder(string id = null)
+        public ActionResult ToOrder(int id = 0)
         {
             coponID = id;
             return View();

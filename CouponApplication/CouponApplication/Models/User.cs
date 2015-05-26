@@ -16,7 +16,7 @@ namespace CouponApplication.Models
         public Gender gender { get; set; }
         public Boolean didCofirm { get; set; }
 
-        public string GPSlocationId { get; set; }
+       // public int GPSlocationId { get; set; }
         public virtual GPS GPSlocation { get; set; }
 
         public virtual List<SocialNet> AccountsOf { get; set; }

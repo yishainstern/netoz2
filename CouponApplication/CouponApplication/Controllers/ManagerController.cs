@@ -12,7 +12,12 @@ namespace CouponApplication.Controllers
     {
         private CouponContext db = new CouponContext();
         private static string OwnerId = null;
-        private static string busnissID = null;
+        private static int busnissID = 0;
+
+        public ManagerController(string s) 
+        {
+            OwnerId = s;
+        }
         //
         // GET: /Admin/
 
@@ -169,23 +174,33 @@ namespace CouponApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                //send email to owner with here password
-                System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
+                //לבדוק שלא קיים אותו בעל עסק
+                var owner = db.BusinessOwners.Where(a => a.Email.Equals(user.Email) && a.Password.Equals(user.Password)).FirstOrDefault();
 
-                message.From = new System.Net.Mail.MailAddress("daved123daved@hotmail.com");
-                message.To.Add(new System.Net.Mail.MailAddress(user.Email));
+                if (owner == null)
+                {
+                    //send email to owner with here password
+                    System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
 
-                message.IsBodyHtml = true;
-                message.BodyEncoding = Encoding.UTF8;
-                message.Subject = "Add Owner";
-                message.Body = "hi Owner, you can logIn in the application with email:  " + user.Email+" and your password is: "+ user.Password;
+                    message.From = new System.Net.Mail.MailAddress("daved123daved@hotmail.com");
+                    message.To.Add(new System.Net.Mail.MailAddress(user.Email));
 
-                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
-                client.Send(message);
-                //
-                db.BusinessOwners.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("businessManagment");
+                    message.IsBodyHtml = true;
+                    message.BodyEncoding = Encoding.UTF8;
+                    message.Subject = "Add Owner";
+                    message.Body = "hi Owner, you can logIn in the application with email:  " + user.Email + " and your password is: " + user.Password;
+
+                    System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+                    client.Send(message);
+                    //
+                    db.BusinessOwners.Add(user);
+                    db.SaveChanges();
+                    return RedirectToAction("businessManagment");
+                }
+                else {
+                    TempData["notice60"] = "--->this owner was existed!!!";
+                    return View(user);    
+                }
             }
 
             return View(user);
@@ -205,30 +220,32 @@ namespace CouponApplication.Controllers
             string ansAdmin = "false";
             bool owner = false;
             bool field = true;
-            if (Session["Admin"].ToString() == "true")
-            {
-                ansAdmin = "true";
-                b.Business.Status = "מאושר";
-            }
-            else
-            {
-                Notifications not = db.Notifications.Find(b.Business.BusinessId);
-                if (not == null)
+            if (Session != null) {
+                if (Session["Admin"].ToString() == "true")
                 {
-                    not = new Notifications();
-                    not.NotificationsId = b.Business.BusinessId;
-                    not.Manager = db.Manager.First();
-                    not.ManagerId = db.Manager.First().PersonId;
-                    not.Type = "Accept Business";
-                    not.Content = "Business id= " + b.Business.BusinessId;
-                    db.Manager.First().Notifications.Add(not);
+                    ansAdmin = "true";
+                    b.Business.Status = "מאושר";
                 }
                 else
                 {
-                    not.Type = "Accept Business";
-                    not.Content = "Business id= " + b.Business.BusinessId;
+                    Notifications not = db.Notifications.Find(b.Business.BusinessId);
+                    if (not == null)
+                    {
+                        not = new Notifications();
+                        not.NotificationsId = b.Business.BusinessId;
+                        not.Manager = db.Manager.First();
+                        not.ManagerId = db.Manager.First().PersonId;
+                        not.Type = "Accept Business";
+                        not.Content = "Business id= " + b.Business.BusinessId;
+                        db.Manager.First().Notifications.Add(not);
+                    }
+                    else
+                    {
+                        not.Type = "Accept Business";
+                        not.Content = "Business id= " + b.Business.BusinessId;
+                    }
+                    b.Business.Status = "לא מאושר";
                 }
-                b.Business.Status = "לא מאושר";
             }
             if (ModelState.IsValid)
             {
@@ -239,7 +256,7 @@ namespace CouponApplication.Controllers
                         owner = true;
                     }
                 }
-                if (string.IsNullOrEmpty(b.Business.Name) || string.IsNullOrEmpty(b.Business.BusinessId) || string.IsNullOrEmpty(b.Business.Adress) || string.IsNullOrEmpty(b.Business.City))
+                if (string.IsNullOrEmpty(b.Business.Name) || b.Business.BusinessId==null || string.IsNullOrEmpty(b.Business.Adress) || string.IsNullOrEmpty(b.Business.City))
                 {
                     TempData["notice2"] = "--->all fields are required!!!"; field = false;
                 }
@@ -282,7 +299,7 @@ namespace CouponApplication.Controllers
         }
 
         //Categories
-        public ActionResult Categories(string id = null)
+        public ActionResult Categories(int id = 0)
         {
             busnissID = id;
             List<Category> ListC = new List<Category>();
@@ -347,7 +364,7 @@ namespace CouponApplication.Controllers
             return View(C);
         }
         //Copons
-        public ActionResult Copons(string id = null)
+        public ActionResult Copons(int id = 0)
         {
             busnissID = id;
             List<Coupon> ListC = new List<Coupon>();
@@ -468,7 +485,7 @@ namespace CouponApplication.Controllers
         [HttpPost]
         public ActionResult EditCoupon(Coupon copon)
         {
-            string Bid = null;
+            int Bid=0;
             if (ModelState.IsValid)
             {
                 foreach (Coupon C in db.Coupons)

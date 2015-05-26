@@ -24,7 +24,7 @@ namespace CouponApplication.Controllers
         }
 
         //Showbusiness
-        public ActionResult Showbusiness(string id = null)
+        public ActionResult Showbusiness(int id = 0)
         {
             foreach (Business b in db.Businesses)
             {

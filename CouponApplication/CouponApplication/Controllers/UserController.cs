@@ -41,7 +41,8 @@ namespace CouponApplication.Controllers
         [HttpPost]
         public ActionResult LogIn(User u)
         {
-            // this action is for handle post (login)
+            //TempData["aaaa"] = "";
+           // this action is for handle post (login)
             if (ModelState.IsValid) // this is check validity
             {
                 bool ans = chickLogIn(u);
@@ -60,8 +61,11 @@ namespace CouponApplication.Controllers
                         }
                         else if (user != null)
                         {
-                            Session["LogedUserID"] = user.PersonId.ToString();
-                            Session["LogedUserFullname"] = user.Name.ToString();
+                            if (Session != null)
+                            {
+                                Session["LogedUserID"] = user.PersonId.ToString();
+                                Session["LogedUserFullname"] = user.Name.ToString();
+                            }
                             useID = user.PersonId;
                             return RedirectToAction("AfterLogin");
                         }
@@ -183,9 +187,7 @@ namespace CouponApplication.Controllers
             bool ans = ckickForm(models.User);
             if (ModelState.IsValid)
             {
-                using (CouponContext dc = new CouponContext())
-                {
-                    var v = dc.Users.Where(a => a.Email.Equals(models.User.Email) || a.PersonId.Equals(models.User.PersonId)).FirstOrDefault();
+                var v = db.Users.Where(a => a.Email.Equals(models.User.Email) || a.PersonId.Equals(models.User.PersonId)).FirstOrDefault();
                     if (v != null)
                     {
                         ModelState.AddModelError("Exist", "--->the Email or the Id was exist!!!");
@@ -209,8 +211,11 @@ namespace CouponApplication.Controllers
                         {
                             db.Users.Add(models.User);
                             db.SaveChanges();
+                            if (Session != null)
+                            {
                             Session["LogedUserID"] = models.User.PersonId.ToString();
                             Session["LogedUserFullname"] = models.User.Name.ToString();
+                            }
                             useID = models.User.PersonId;
                             return RedirectToAction("AddCategories", new { PersonID = useID });
                         }
@@ -221,7 +226,6 @@ namespace CouponApplication.Controllers
                         }
                         
                     }
-                }
             }
             return RedirectToAction("UserSignUp");
         }
