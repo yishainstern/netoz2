@@ -14,6 +14,10 @@ namespace CouponApplication.Controllers
         private static string OwnerId = null;
         private static int busnissID = 0;
 
+        public ManagerController()
+        {
+        }
+
         public ManagerController(string s) 
         {
             OwnerId = s;
