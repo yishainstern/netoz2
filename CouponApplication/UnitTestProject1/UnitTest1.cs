@@ -13,10 +13,11 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         CouponContext db = new CouponContext();
-
+       
         [TestMethod]
         public void TestSignIn()
         {
+            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
             Database.SetInitializer<CouponContext>(null);
             UserController controller = new UserController(db);
             User use = new User();
@@ -35,7 +36,7 @@ namespace UnitTestProject1
             m.Categories.Add(new Category { Name = "eat", Choose = true, CategoryId = 2 });
             m.Categories.Add(new Category { Name = "muzic", Choose = true, CategoryId = 3 });
             controller.SignUp(m);
-            foreach (User u in db.Users) 
+            foreach (User u in db.Users)
             {
                 if (u.Email == use.Email)
                 {
@@ -92,22 +93,77 @@ namespace UnitTestProject1
             Owner.Phone = "05454";
             Owner.Businesses = new List<Business>();
             var result = controller.AddbusinessOwner(Owner) as RedirectToRouteResult;
-            foreach(BusinessOwner o in db.BusinessOwners)
+            foreach (BusinessOwner o in db.BusinessOwners)
             {
-                if(o.Email==Owner.Email)
+                if (o.Email == Owner.Email && o.PersonId == Owner.PersonId)
                 {
-                    Assert.IsNull(result);
+                    Assert.IsTrue(true);
                     return;
                 }
             }
             Assert.AreEqual("businessManagment", result.RouteValues["action"]);
         }
 
-        //Addbusiness
-     /*   [TestMethod]
-        public void TestAddbusiness()
+       // Addbusiness
+           [TestMethod]
+           public void TestAddbusiness()
+           {
+               Database.SetInitializer<CouponContext>(null);
+               ManagerController controller = new ManagerController(db);
+
+               BusinessOwner use = new BusinessOwner();
+               use.PersonId = "123";
+               use.Name = "dodo";
+               use.Email = "dodo@hotmail.com";
+               use.Password = "123";
+               use.Phone = "0555";
+               
+               controller.AddbusinessOwner(use);
+               Business B = new Business();
+               B.Adress = "naharya";
+               B.City = "naharya";
+               B.Name = "castro";
+               B.Status = "מאושר";
+               B.Coupons = new List<Coupon>();
+               B.BusinessCategory = new List<Category>();
+               B.Owner = use;
+               B.OwnerId = "123";
+               AllModel m = new AllModel();
+               m.Business = B;
+               m.Categories = new List<Category>();
+               m.Categories.Add(new Category { Name = "food", Choose = true, CategoryId = 1 });
+               m.Categories.Add(new Category { Name = "eat", Choose = true, CategoryId = 2 });
+               m.Categories.Add(new Category { Name = "muzic", Choose = true, CategoryId = 3 });
+               controller.Addbusiness(m);
+               foreach (Business bes in db.Businesses)
+               {
+                   if (bes.Name == B.Name && bes.City == B.City)
+                   {
+                       Assert.IsTrue(true);
+                       return;
+                   }
+               }
+               Assert.Fail();
+           }
+
+
+
+        //SearchBusiness that excits and not
+        [TestMethod]
+        public void TestSearchBusinessIsIn()
         {
-            ManagerController controller = new ManagerController("1212");
+            bool flag,flag2 = false;
+            CouponContext db = new CouponContext();
+            Database.SetInitializer<CouponContext>(null);
+            ManagerController controller = new ManagerController(db);
+            BusinessOwner use = new BusinessOwner();
+            use.PersonId = "123";
+            use.Name = "dodo";
+            use.Email = "dodo@hotmail.com";
+            use.Password = "123";
+            use.Phone = "0555";
+
+            controller.AddbusinessOwner(use);
             Business B = new Business();
             B.Adress = "naharya";
             B.City = "naharya";
@@ -115,8 +171,8 @@ namespace UnitTestProject1
             B.Status = "מאושר";
             B.Coupons = new List<Coupon>();
             B.BusinessCategory = new List<Category>();
-            B.Owner = new BusinessOwner();
-            B.OwnerId = "1";
+            B.Owner = use;
+            B.OwnerId = "123";
             AllModel m = new AllModel();
             m.Business = B;
             m.Categories = new List<Category>();
@@ -124,30 +180,271 @@ namespace UnitTestProject1
             m.Categories.Add(new Category { Name = "eat", Choose = true, CategoryId = 2 });
             m.Categories.Add(new Category { Name = "muzic", Choose = true, CategoryId = 3 });
             controller.Addbusiness(m);
-            foreach (Business bes in db.Businesses)
+
+            //second bussiness
+
+            BusinessOwner use1 = new BusinessOwner();
+            use1.PersonId = "123";
+            use1.Name = "dodo";
+            use1.Email = "dodo@hotmail.com";
+            use1.Password = "123";
+            use1.Phone = "0555";
+
+            controller.AddbusinessOwner(use1);
+            Business B1 = new Business();
+            B1.Adress = "haifa";B1.City = "hafia";B1.Name = "castro";B1.Status = "מאושר";
+            B1.Coupons = new List<Coupon>();
+            B1.BusinessCategory = new List<Category>();
+            B1.Owner = use1;
+            B1.OwnerId = "123";
+            AllModel m1 = new AllModel();
+            m1.Business = B1;
+            m1.Categories = new List<Category>();
+            m1.Categories.Add(new Category { Name = "eat", Choose = true, CategoryId = 2 });
+            m1.Categories.Add(new Category { Name = "muzic", Choose = true, CategoryId = 3 });
+            controller.Addbusiness(m1);
+            BusinessController controllerq = new BusinessController();
+            Business serch = new Business();
+            serch.Adress = "haifa";serch.City = "haifa";serch.Name = "castro";serch.Status = "מאושר";
+            serch.Coupons = new List<Coupon>();
+            serch.BusinessCategory = new List<Category>();
+            serch.Owner = use1;serch.OwnerId = "123";AllModel m2 = new AllModel();
+            m2.Business = serch;
+            m2.Categories = new List<Category>();
+            m2.Categories.Add(new Category { Name = "sport", Choose = true, CategoryId = 3 });
+           object bb =  controllerq.SearchBusiness(serch);
+           if (bb.GetType().Name == "ViewResults"){flag = true;}
+           var result = controllerq.SearchBusiness(serch) as RedirectToRouteResult;
+           Assert.AreEqual("ShowSearchBusiness", result.RouteValues["action"]);
+        }
+
+
+        [TestMethod]
+        public void TestSearchBusinessIsNotIn()
+        {
+            bool flag, flag2 = false;
+            CouponContext db = new CouponContext();
+            Database.SetInitializer<CouponContext>(null);
+            ManagerController controller = new ManagerController(db);
+            BusinessOwner use = new BusinessOwner();
+            use.PersonId = "123";
+            use.Name = "dodo";
+            use.Email = "dodo@hotmail.com";
+            use.Password = "123";
+            use.Phone = "0555";
+
+            controller.AddbusinessOwner(use);
+            Business B = new Business();
+            B.Adress = "naharya";
+            B.City = "naharya";
+            B.Name = "castro";
+            B.Status = "מאושר";
+            B.Coupons = new List<Coupon>();
+            B.BusinessCategory = new List<Category>();
+            B.Owner = use;
+            B.OwnerId = "123";
+            AllModel m = new AllModel();
+            m.Business = B;
+            m.Categories = new List<Category>();
+            m.Categories.Add(new Category { Name = "food", Choose = true, CategoryId = 1 });
+            m.Categories.Add(new Category { Name = "eat", Choose = true, CategoryId = 2 });
+            m.Categories.Add(new Category { Name = "muzic", Choose = true, CategoryId = 3 });
+            controller.Addbusiness(m);
+
+            //second bussiness
+
+            BusinessOwner use1 = new BusinessOwner();
+            use1.PersonId = "123";
+            use1.Name = "dodo";
+            use1.Email = "dodo@hotmail.com";
+            use1.Password = "123";
+            use1.Phone = "0555";
+
+            controller.AddbusinessOwner(use1);
+            Business B1 = new Business();
+            B1.Adress = "haifa";
+            B1.City = "hafia";
+            B1.Name = "castro";
+            B1.Status = "מאושר";
+            B1.Coupons = new List<Coupon>();
+            B1.BusinessCategory = new List<Category>();
+            B1.Owner = use1;
+            B1.OwnerId = "123";
+            AllModel m1 = new AllModel();
+            m1.Business = B1;
+            m1.Categories = new List<Category>();
+            m1.Categories.Add(new Category { Name = "eat", Choose = true, CategoryId = 2 });
+            m1.Categories.Add(new Category { Name = "muzic", Choose = true, CategoryId = 3 });
+            controller.Addbusiness(m1);
+
+            BusinessController controllerq = new BusinessController();
+            Business serch = new Business();
+            serch.Adress = "haifa";
+            serch.City = "ddddddd";
+            serch.Name = "castro";
+            serch.Status = "מאושר";
+            serch.Coupons = new List<Coupon>();
+            serch.BusinessCategory = new List<Category>();
+            serch.Owner = use1;
+            serch.OwnerId = "123";
+            AllModel m2 = new AllModel();
+            m2.Business = serch;
+            m2.Categories = new List<Category>();
+            m2.Categories.Add(new Category { Name = "sport", Choose = true, CategoryId = 3 });
+            object bb = controllerq.SearchBusiness(serch);
+            if (bb.GetType().Name == "ViewResult")
             {
-                if (bes.Name == B.Name && bes.City == B.City)
+                Assert.IsTrue(true);
+                return;
+            }
+            else
+            {
+                Assert.IsTrue(false);
+            }
+        }
+
+        //add category
+         [TestMethod]
+        public void addCategory()
+        {
+            Database.SetInitializer<CouponContext>(null);
+            ManagerController controller = new ManagerController(db);
+
+            Category c = new Category();
+            c.Name = "shlom";
+            c.Choose = false;
+
+            controller.AddCategory(c);
+
+            foreach (Category u in db.Categories)
+            {
+                if (u.Name == c.Name)
                 {
                     Assert.IsTrue(true);
                     return;
+
                 }
             }
             Assert.Fail();
-        }*/
+        }
 
 
 
-        //SearchBusiness
-     /*   [TestMethod]
-        public void TestSearchBusiness()
+         [TestMethod]
+         public void addCupon()
+         {
+             CouponContext db = new CouponContext();
+             Database.SetInitializer<CouponContext>(null);
+             ManagerController controller = new ManagerController(db);
+             BusinessOwner use = new BusinessOwner();
+             use.PersonId = "123";
+             use.Name = "dodo";
+             use.Email = "dodo@hotmail.com";
+             use.Password = "123";
+             use.Phone = "0555";
+
+             controller.AddbusinessOwner(use);
+             Business B = new Business();
+             B.Adress = "naharya";
+             B.City = "naharya";
+             B.Name = "castro";
+             B.Status = "מאושר";
+             B.Coupons = new List<Coupon>();
+             B.BusinessCategory = new List<Category>();
+             B.Owner = use;
+             B.OwnerId = "123";
+             AllModel m = new AllModel();
+             m.Business = B;
+             m.Categories = new List<Category>();
+             m.Categories.Add(new Category { Name = "food", Choose = true, CategoryId = 1 });
+             m.Categories.Add(new Category { Name = "eat", Choose = true, CategoryId = 2 });
+             m.Categories.Add(new Category { Name = "muzic", Choose = true, CategoryId = 3 });
+             controller.Addbusiness(m);
+             DateTime cc = DateTime.Now;
+             cc.AddDays(70);
+             //new coupun
+             Coupon b = new Coupon();
+             b.Business = B;
+             b.BusinessId = 1;
+             b.Categories = m.Categories;
+             b.CouponId = 1;
+             b.CurrentPrice = 20;
+             b.deadline = cc;
+             m.Coupon = b;
+             controller.AddCopons(m);
+             
+             //b.deadline = ddd;
+         }
+
+
+        [TestMethod]
+        public void CouponRealization()
+        {
+            BusinessCouponController controller = new BusinessCouponController();
+            var result = controller.CouponRealization("1234") as RedirectToRouteResult;
+            Assert.AreEqual(result, null);
+        }
+
+        //AddCouponFromNetWork
+        [TestMethod]
+        public void AddCouponFromNetWork()
+        {
+            UserCouponController controller = new UserCouponController();
+            Cpuon_from_network coupon = new Cpuon_from_network();
+            coupon.Link="gggg";
+            coupon.netwrok_name="google";
+            var result = controller.AddCouponFromNetWork(coupon) as RedirectToRouteResult;
+            Assert.AreEqual("CouponFromNetWork", result.RouteValues["action"]);
+        }
+
+
+        //SearchCoupon
+        [TestMethod]
+        public void SearchCoupon()
         {
             CouponContext db = new CouponContext();
-            BusinessController controller = new BusinessController();
-
-            User use = new User();
+            Database.SetInitializer<CouponContext>(null);
+            ManagerController controller = new ManagerController(db);
+            BusinessOwner use = new BusinessOwner();
+            use.PersonId = "123";
+            use.Name = "dodo";
             use.Email = "dodo@hotmail.com";
-            var result = controller.MyPass(use) as RedirectToRouteResult;
-            Assert.IsNull(result);
-        }*/
+            use.Password = "123";
+            use.Phone = "0555";
+
+            controller.AddbusinessOwner(use);
+            Business B = new Business();
+            B.Adress = "naharya";
+            B.City = "naharya";
+            B.Name = "castro";
+            B.Status = "מאושר";
+            B.Coupons = new List<Coupon>();
+            B.BusinessCategory = new List<Category>();
+            B.Owner = use;
+            B.OwnerId = "123";
+            AllModel m = new AllModel();
+            m.Business = B;
+            m.Categories = new List<Category>();
+            m.Categories.Add(new Category { Name = "food", Choose = true, CategoryId = 1 });
+            m.Categories.Add(new Category { Name = "eat", Choose = true, CategoryId = 2 });
+            m.Categories.Add(new Category { Name = "muzic", Choose = true, CategoryId = 3 });
+            controller.Addbusiness(m);
+            DateTime cc = DateTime.Now;
+            cc.AddDays(70);
+            //new coupun
+            Coupon b = new Coupon();
+            b.Business = B;
+            b.BusinessId = 1;
+            b.Categories = m.Categories;
+            b.CouponId = 1;
+            b.CurrentPrice = 20;
+            b.deadline = cc;
+            m.Coupon = b;
+            controller.AddCopons(m);
+
+            UserCouponController cont = new UserCouponController();
+            var result = cont.SearchCoupon(m.Coupon) as RedirectToRouteResult;
+            Assert.AreEqual("ShowCoupons", result.RouteValues["action"]);
+        }
     }
 }

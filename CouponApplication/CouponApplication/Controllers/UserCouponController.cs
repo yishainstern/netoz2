@@ -96,6 +96,7 @@ namespace CouponApplication.Controllers
             {
                 foreach (Category cate in Copon.Categories)
                 {
+                    if(C.Categories.Count!=0)
                     if (cate.Name.Equals(C.Categories[0].Name))
                     {
                         ListC.Add(Copon);
