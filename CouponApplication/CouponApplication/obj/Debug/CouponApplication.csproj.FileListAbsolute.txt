@@ -241,6 +241,5 @@ C:\Users\User\Desktop\netoz2\CouponApplication\CouponApplication\bin\ko\System.S
 C:\Users\User\Desktop\netoz2\CouponApplication\CouponApplication\bin\ru\System.Spatial.resources.dll
 C:\Users\User\Desktop\netoz2\CouponApplication\CouponApplication\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\User\Desktop\netoz2\CouponApplication\CouponApplication\bin\zh-Hant\System.Spatial.resources.dll
-C:\Users\User\Desktop\netoz2\CouponApplication\CouponApplication\obj\Debug\CouponApplication.csprojResolveAssemblyReference.cache
 C:\Users\User\Desktop\netoz2\CouponApplication\CouponApplication\obj\Debug\CouponApplication.dll
 C:\Users\User\Desktop\netoz2\CouponApplication\CouponApplication\obj\Debug\CouponApplication.pdb

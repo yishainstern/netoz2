@@ -19,6 +19,11 @@ namespace CouponApplication.Controllers
             
         }
 
+        public ManagerController(CouponContext c) 
+        {
+            db = c;
+        }
+
         public ManagerController(string s)
         {
             OwnerId = s;
@@ -226,6 +231,11 @@ namespace CouponApplication.Controllers
             string ansAdmin = "false";
             bool owner = false;
             bool field = true;
+            if (Session == null)
+            {
+                OwnerId = b.Business.OwnerId;
+            }
+
             if (Session != null)
             {
                 if (Session["Admin"].ToString() == "true")
